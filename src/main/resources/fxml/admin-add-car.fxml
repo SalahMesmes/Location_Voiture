@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.carrental.controllers.AdminAddCarController"
+            fitToWidth="true">
+
+    <VBox spacing="15" style="-fx-padding: 30;">
+        <Label fx:id="titleLabel" text="Ajouter une nouvelle voiture" styleClass="form-title">
+            <font>
+                <Font size="20" />
+            </font>
+        </Label>
+
+        <Separator />
+
+        <GridPane hgap="15" vgap="15">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="150"/>
+                <ColumnConstraints prefWidth="300" hgrow="ALWAYS"/>
+            </columnConstraints>
+
+           
+            <Label text="Marque *:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="brandField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+            
+            <Label text="Modèle *:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField fx:id="modelField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+           
+            <Label text="Type *:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <ComboBox fx:id="typeField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="300"/>
+
+           
+            <Label text="Année *:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField fx:id="yearField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+         
+            <Label text="Prix / jour (€) *:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField fx:id="priceField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+          
+            <Label text="Carburant *:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <ComboBox fx:id="fuelTypeField" GridPane.columnIndex="1" GridPane.rowIndex="5" prefWidth="300"/>
+
+           
+            <Label text="Transmission *:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+            <ComboBox fx:id="transmissionField" GridPane.columnIndex="1" GridPane.rowIndex="6" prefWidth="300"/>
+
+            
+            <Label text="Nombre de places *:" GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+            <TextField fx:id="seatsField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+     
+            <Label text="Image (URL ou chemin):" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+            <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                <TextField fx:id="imageUrlField" promptText="Ex: /images/cars/peugeot208.jpg ou http://..."/>
+                <Label text="Exemples: /images/cars/voiture.jpg ou https://example.com/image.jpg" 
+                       style="-fx-text-fill: gray; -fx-font-size: 11;"/>
+            </VBox>
+
+         
+            <Label text="Disponible:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+            <CheckBox fx:id="availableField" selected="true" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+        </GridPane>
+
+        <Separator />
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button fx:id="actionButton" text="Ajouter"
+                    onAction="#onAdd"
+                    styleClass="primary-button"
+                    defaultButton="true"/>
+
+            <Button text="Annuler"
+                    onAction="#onCancel"
+                    cancelButton="true"/>
+        </HBox>
+    </VBox>
+
+</ScrollPane>
+

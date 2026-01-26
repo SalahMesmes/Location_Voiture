@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.carrental.controllers.AdminDashboardController">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 15; -fx-background-color: #2c3e50;">
+            <Label text="Dashboard Admin" style="-fx-text-fill: white; -fx-font-size: 20; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Déconnexion"
+                    onAction="#onLogout"
+                    styleClass="secondary-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="mainTabs" tabClosingPolicy="UNAVAILABLE">
+            <Tab text="Gestion des Voitures">
+                <BorderPane style="-fx-padding: 20;">
+                    <top>
+                        <HBox spacing="10" style="-fx-padding: 0 0 15 0;">
+                            <Button text="+ Ajouter une voiture"
+                                    onAction="#onAddCar"
+                                    styleClass="primary-button"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                        </HBox>
+                    </top>
+                    <center>
+                        <ScrollPane fitToWidth="true">
+                            <FlowPane fx:id="carsContainer"
+                                      hgap="20"
+                                      vgap="20"
+                                      style="-fx-padding: 20;"/>
+                        </ScrollPane>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <Tab text="Historique des Locations">
+                <BorderPane style="-fx-padding: 20;">
+                    <center>
+                        <ScrollPane fitToWidth="true">
+                            <VBox fx:id="historyContainer"
+                                  spacing="15"
+                                  style="-fx-padding: 20;"/>
+                        </ScrollPane>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <Tab text="Locations en cours">
+                <BorderPane style="-fx-padding: 20;">
+                    <center>
+                        <ScrollPane fitToWidth="true">
+                            <VBox fx:id="activeRentalsContainer"
+                                  spacing="15"
+                                  style="-fx-padding: 20;"/>
+                        </ScrollPane>
+                    </center>
+                </BorderPane>
+            </Tab>
+        </TabPane>
+    </center>
+
+</BorderPane>
+

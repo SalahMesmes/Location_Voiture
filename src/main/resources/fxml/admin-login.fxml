@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.carrental.controllers.AdminLoginController"
+      spacing="20"
+      alignment="CENTER"
+      style="-fx-padding: 40; -fx-background-color: #f5f5f5;">
+
+    <Label text="Connexion Admin" styleClass="form-title">
+        <font>
+            <Font size="24" />
+        </font>
+    </Label>
+
+    <Separator />
+
+    <VBox spacing="15" style="-fx-padding: 20;">
+        <VBox spacing="5">
+            <Label text="Nom d'utilisateur:" />
+            <TextField fx:id="usernameField" 
+                       promptText="admin"
+                       prefWidth="250"/>
+        </VBox>
+
+        <VBox spacing="5">
+            <Label text="Mot de passe:" />
+            <PasswordField fx:id="passwordField" 
+                          promptText="Entrez le mot de passe"
+                          prefWidth="250"/>
+        </VBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Se connecter"
+                    onAction="#onLogin"
+                    styleClass="primary-button"
+                    defaultButton="true"/>
+
+            <Button text="Annuler"
+                    onAction="#onCancel"
+                    cancelButton="true"/>
+        </HBox>
+    </VBox>
+
+</VBox>
+

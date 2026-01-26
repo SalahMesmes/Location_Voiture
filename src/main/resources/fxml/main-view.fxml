@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.carrental.controllers.MainViewController">
+
+    <top>
+        <HBox spacing="10" style="-fx-padding: 15;">
+            <TextField fx:id="searchField"
+                       promptText="Rechercher par marque ou modèle..."
+                       HBox.hgrow="ALWAYS"/>
+
+            <ComboBox fx:id="typeFilter"
+                      prefWidth="120"/>
+
+            <Button text="Rechercher"
+                    onAction="#onSearch"
+                    styleClass="primary-button"/>
+
+            <Button text="Admin"
+                    onAction="#openAdminLogin"
+                    styleClass="primary-button"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <FlowPane fx:id="carsContainer"
+                      hgap="20"
+                      vgap="20"
+                      style="-fx-padding: 20;"/>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-padding: 15;">
+            <Button text="Rafraîchir"
+                    onAction="#onRefresh"
+                    styleClass="primary-button"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

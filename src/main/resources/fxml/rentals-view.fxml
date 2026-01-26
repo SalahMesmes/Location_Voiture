@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.carrental.controllers.RentalsViewController"
+      spacing="15">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <Label text="Locations en cours" styleClass="form-title">
+        <font>
+            <Font size="20" />
+        </font>
+    </Label>
+
+    <Separator />
+
+    <ScrollPane fitToWidth="true" fitToHeight="true">
+        <VBox fx:id="rentalsContainer" spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+        </VBox>
+    </ScrollPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="closeButton" text="Fermer" onAction="#onCloseButtonClick" />
+    </HBox>
+</VBox>
+

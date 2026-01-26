@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.carrental.controllers.CarDetailsController" spacing="15">
+   <padding>
+      <Insets top="20" right="20" bottom="20" left="20" />
+   </padding>
+   <ImageView fx:id="carImage" fitWidth="200" fitHeight="150" preserveRatio="true" />
+   <GridPane hgap="10" vgap="10">
+      <columnConstraints>
+         <ColumnConstraints minWidth="120" />
+         <ColumnConstraints minWidth="200" hgrow="ALWAYS" />
+      </columnConstraints>
+      <Label text="Marque :" GridPane.columnIndex="0" />
+      <Label fx:id="brandLabel" GridPane.columnIndex="1" />
+      <Label text="Modèle :" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+      <Label fx:id="modelLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+      <Label text="Type :" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+      <Label fx:id="typeLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+      <Label text="Année :" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+      <Label fx:id="yearLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+      <Label text="Carburant :" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+      <Label fx:id="fuelTypeLabel" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+      <Label text="Transmission :" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+      <Label fx:id="transmissionLabel" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+      <Label text="Places :" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+      <Label fx:id="seatsLabel" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+      <Label text="Prix/jour :" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+      <Label fx:id="pricePerDayLabel" styleClass="price-label" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+   </GridPane>
+   <HBox spacing="10" alignment="CENTER">
+      <Button fx:id="rentButton" text="Louer cette voiture" styleClass="rent-button" onAction="#onRentButtonClick" />
+      <Button fx:id="closeButton" text="Fermer" onAction="#onCloseButtonClick" />
+   </HBox>
+</VBox>
+
+
+
+
+

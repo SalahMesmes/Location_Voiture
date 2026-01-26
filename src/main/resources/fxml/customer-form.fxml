@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.carrental.controllers.CustomerFormController" spacing="0">
+   <ScrollPane fitToWidth="true" fitToHeight="true" vbarPolicy="AS_NEEDED" hbarPolicy="NEVER">
+      <VBox spacing="20">
+         <padding>
+            <Insets top="30" right="30" bottom="30" left="30" />
+         </padding>
+         <Label text="Formulaire de réservation" styleClass="form-title">
+            <font>
+               <Font size="20" />
+            </font>
+         </Label>
+         <Separator />
+         <Label text="Informations personnelles" styleClass="section-title" />
+         <GridPane hgap="10" vgap="10" styleClass="form-section">
+            <columnConstraints>
+               <ColumnConstraints minWidth="150" />
+               <ColumnConstraints minWidth="250" hgrow="ALWAYS" />
+            </columnConstraints>
+            <Label text="Prénom *" GridPane.columnIndex="0" />
+            <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
+            <Label text="Nom *" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextField fx:id="lastNameField" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+            <Label text="Téléphone *" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <TextField fx:id="phoneField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            <Label text="Email *" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+            <TextField fx:id="emailField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+         </GridPane>
+         <Separator />
+         <Label text="Permis de conduire" styleClass="section-title" />
+         <GridPane hgap="10" vgap="10" styleClass="form-section">
+            <columnConstraints>
+               <ColumnConstraints minWidth="150" />
+               <ColumnConstraints minWidth="250" hgrow="ALWAYS" />
+            </columnConstraints>
+            <Label text="Numéro de permis *" GridPane.columnIndex="0" />
+            <TextField fx:id="licenseField" GridPane.columnIndex="1" />
+            <Label text="Date d'expiration *" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <DatePicker fx:id="licenseExpiryPicker" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+         </GridPane>
+         <Separator />
+         <Label text="Adresse" styleClass="section-title" />
+         <GridPane hgap="10" vgap="10" styleClass="form-section">
+            <columnConstraints>
+               <ColumnConstraints minWidth="150" />
+               <ColumnConstraints minWidth="250" hgrow="ALWAYS" />
+            </columnConstraints>
+            <Label text="Adresse complète" GridPane.columnIndex="0" />
+            <TextArea fx:id="addressField" prefRowCount="3" wrapText="true" GridPane.columnIndex="1" />
+         </GridPane>
+         <Separator />
+         <Label text="Période de location" styleClass="section-title" />
+         <GridPane hgap="10" vgap="10" styleClass="form-section">
+            <columnConstraints>
+               <ColumnConstraints minWidth="150" />
+               <ColumnConstraints minWidth="250" hgrow="ALWAYS" />
+            </columnConstraints>
+            <Label text="Date de début *" GridPane.columnIndex="0" />
+            <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
+            <Label text="Date de fin *" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <DatePicker fx:id="endDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+         </GridPane>
+         <Separator />
+         <Label fx:id="totalPriceLabel" styleClass="price-label" alignment="CENTER">
+            <font>
+               <Font size="24" />
+            </font>
+         </Label>
+         <HBox spacing="15" alignment="CENTER">
+            <Button fx:id="confirmButton" text="Confirmer" styleClass="rent-button" onAction="#onConfirmButtonClick" />
+            <Button fx:id="cancelButton" text="Annuler" onAction="#onCancelButtonClick" />
+         </HBox>
+      </VBox>
+   </ScrollPane>
+</VBox>
