@@ -7,22 +7,25 @@ import java.util.Properties;
 public class DatabaseManager {
     private static DatabaseManager instance;
 
+    // Parametres de connexion lus depuis database.properties 
     private String dbUrl;
     private String dbUsername;
     private String dbPassword;
 
+    // Connexion JDBC vers MySQL (reutilisee tant qu'elle est ouverte) 
     private Connection connection;
 
-    private static final String DB_NAME = "location_voitures";
-
+    // URLs par defaut pour MySQL en local  database.properties manquant ou invalide) 
+    private static final String DB_NAME_LOCAL = "location_voitures";
     private static final String URL_3306 =
-            "jdbc:mysql://localhost:3306/" + DB_NAME + "?useSSL=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true";
+            "jdbc:mysql://localhost:3306/" + DB_NAME_LOCAL + "?useSSL=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true";
     private static final String URL_8889 =
-            "jdbc:mysql://localhost:8889/" + DB_NAME + "?useSSL=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true";
+            "jdbc:mysql://localhost:8889/" + DB_NAME_LOCAL + "?useSSL=false&serverTimezone=Europe/Paris&allowPublicKeyRetrieval=true";
 
+    // Constructeur prive on ne peut pas faire "new DatabaseManager()" ailleurs 
     private DatabaseManager() {
-        loadDatabaseConfig();
-        initializeDatabase();
+        loadDatabaseConfig();   // Charge db.url, db.username, db.password depuis database.properties
+        initializeDatabase();   // Cree les tables voitures, clients, locations si besoin
     }
 
     public static DatabaseManager getInstance() {
@@ -30,8 +33,8 @@ public class DatabaseManager {
         return instance;
     }
 
+    //Lire le fichier database.properties et remplit dbUrl, dbUsername, dbPassword 
     private void loadDatabaseConfig() {
-        // Defaults sûrs
         dbUrl = URL_3306;
         dbUsername = "root";
         dbPassword = "";
@@ -49,18 +52,12 @@ public class DatabaseManager {
             String user = prop.getProperty("db.username");
             String pass = prop.getProperty("db.password");
 
-            // Empêche l’URL invalide
-            if (url != null) {
-                url = url.trim();
-                if (!url.isEmpty() && !url.contains("loc...?")) {
-                    dbUrl = url;
-                } else {
-                    System.err.println("db.url invalide dans database.properties -> on garde le default : " + dbUrl);
-                }
+            if (url != null && !url.trim().isEmpty()) {
+                dbUrl = url.trim();
             }
 
             if (user != null && !user.trim().isEmpty()) dbUsername = user.trim();
-            if (pass != null) dbPassword = pass; // peut être vide
+            if (pass != null) dbPassword = pass;
 
         } catch (Exception e) {
             System.err.println("Erreur lecture database.properties : " + e.getMessage());
@@ -70,15 +67,14 @@ public class DatabaseManager {
     public Connection getConnection() throws SQLException {
         if (connection != null && !connection.isClosed()) return connection;
 
-        try { Class.forName("com.mysql.cj.jdbc.Driver"); } catch (ClassNotFoundException ignored) {}
+        boolean isRemote = dbUrl != null && !dbUrl.contains("localhost");
+        String[] urlsToTry = isRemote ? new String[]{dbUrl} : new String[]{dbUrl, URL_3306, URL_8889};
 
-        // Liste d’essais (URL + password)
-        String[] urlsToTry = dbUrl.contains(":8889/") || dbUrl.contains(":3306/") ? new String[]{dbUrl, URL_3306, URL_8889}
-                : new String[]{dbUrl, URL_3306, URL_8889};
-
-        String[] passwordsToTry = (dbPassword != null && !dbPassword.isEmpty())
-                ? new String[]{dbPassword, "", "root"}
-                : new String[]{"", "root"};
+        String[] passwordsToTry = isRemote
+                ? new String[]{dbPassword != null ? dbPassword : ""}
+                : ((dbPassword != null && !dbPassword.isEmpty())
+                    ? new String[]{dbPassword, "", "root"}
+                    : new String[]{"", "root"});
 
         SQLException last = null;
 
@@ -102,9 +98,10 @@ public class DatabaseManager {
             }
         }
 
-        throw last != null ? last : new SQLException("Impossible de se connecter à MySQL (raison inconnue).");
+        throw last != null ? last : new SQLException("Impossible de se connecter à MySQL .");
     }
 
+    // Cree les tables si elles n'existent pas 
     private void initializeDatabase() {
         System.out.println("Initialisation de la base de données...");
         try (Connection conn = getConnection()) {
@@ -165,6 +162,7 @@ public class DatabaseManager {
         }
     }
 
+    //Ferme la connexion a la base a la sortie de l'application
     public void closeConnection() {
         if (connection != null) {
             try { connection.close(); } catch (SQLException ignored) {}

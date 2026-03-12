@@ -24,7 +24,7 @@ buildNumber.properties
 .DS_Store
 Thumbs.db
 
-# Logs
+
 *.log
 run.log
 
